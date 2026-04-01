@@ -6,17 +6,6 @@ import (
 )
 
 func main() {
-	// make(array, len, cap)
-	q := make([]string, 0, 2)
-	q[0] = "q"
-	q[1] = "w"
-	q = append(q, "1")
-	q = append(q, "2")
-	fmt.Println(q)
-
-
-
-
 	transactions := []float32{}
 	for {
 		value, err := scanTransaction()
@@ -34,7 +23,7 @@ func main() {
 
 }
 
-func calculateBalance(transactions []float32) float32{
+func calculateBalance(transactions []float32) float32 {
 	var userBalance float32 = 0
 	for _, value := range transactions {
 		userBalance += value

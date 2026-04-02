@@ -4,18 +4,21 @@ import (
 	"fmt"
 	"errors"
 )
+
+type BookmarkMap = map[string]string
+
 const ok int = 0
 const addInput int = 1
 const delInput int = 2
 const exitProgram int = 3
 
-func Show(bookmarks map[string]string) {
+func Show(bookmarks BookmarkMap) {
 	for key, value := range bookmarks {
 		fmt.Println(key, value)
 	}
 }
 
-func Add(bookmarks map[string]string) (int, error){
+func Add(bookmarks BookmarkMap) (int, error){
 	userInputKey, userInputValue, err := getUserInput(addInput)
 	if err != nil {
 		fmt.Println(err)
@@ -25,13 +28,13 @@ func Add(bookmarks map[string]string) (int, error){
 	return ok, err
 }
 
-func Del(bookmarks map[string]string) map[string]string {
+func Del(bookmarks BookmarkMap) BookmarkMap {
 	userDelKey, _, err := getUserInput(delInput)
 	if err != nil {
 		fmt.Println(err)
-		return map[string]string{"error":"error"}
+		return BookmarkMap{"error":"error"}
 	}
-	deletedElement := map[string]string{userDelKey : bookmarks[userDelKey]}
+	deletedElement := BookmarkMap{userDelKey : bookmarks[userDelKey]}
 	delete(bookmarks, userDelKey)
 
 	return deletedElement

@@ -6,8 +6,10 @@ import (
 	"errors"
 )
 
+type BookmarkMap = map[string]string
+
 func main() {
-	bookmarks := map[string]string{}
+	bookmarks := BookmarkMap{}
 	for {
 		printMenu()
 		userChoice, err := getUserChoice()
@@ -23,7 +25,7 @@ func main() {
 	}
 }
 
-func action(toDo string, bookmarks map[string]string) int{
+func action(toDo string, bookmarks BookmarkMap) int{
 	switch toDo {
 	case "Show":
 		actions.Show(bookmarks)

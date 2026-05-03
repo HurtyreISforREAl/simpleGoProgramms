@@ -5,21 +5,27 @@ import (
 	"os"
 )
 
-func WriteFile(content string, name string) error {
+func WriteFile(content []byte, name string) {
 	file, err := os.Create(name)
 	if err != nil {
 		fmt.Println(err)
+		return
 	}
 	defer file.Close()
-	_, err = file.WriteString(content)
+	_, err = file.Write(content)
 	if err != nil {
-		return err
+		fmt.Println(err)
+		return
 	}
 
 	fmt.Println("Запись прошла успешно")
-	return nil
 }
 
-func ReadFile(name string) {
-	fmt.Println("ok")
+func ReadFile(name string) ([]byte, error) {
+	data, err := os.ReadFile(name)
+	if err != nil {
+		return nil, err
+	}
+
+	return data, nil
 }

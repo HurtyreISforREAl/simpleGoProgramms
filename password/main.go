@@ -1,31 +1,24 @@
 package main
 
 import (
-	"fmt"
-
 	"password/account"
-	"password/files"
+	"password/menu"
 )
 
 func main() {
-	files.WriteFile("hello i am a new file", "file.txt")
-	login := promptData("Введите логин: ")
-	password := promptData("Введите пароль: ")
-	url := promptData("Введите URL: ")
-
-	myAccount, err := account.NewAccountWithTimeStamp(login, password, url)
-	if err != nil {
-		fmt.Println("Неверный формат URL или логин")
-		return
+	vault := account.NewVault()
+Menu:
+	for {
+		variant := menu.GetMenu()
+		switch variant {
+		case 1:
+			menu.CreateAccount(vault)
+		case 2:
+			menu.FindAccount(vault)
+		case 3:
+			menu.DeleteAccount(vault)
+		default:
+			break Menu
+		}
 	}
-	myAccount.OutputPassword()
-	// files.WriteFile()
-	fmt.Println(myAccount)
-}
-
-func promptData(prompt string) string {
-	fmt.Print(prompt)
-	var res string
-	fmt.Scanln(&res)
-	return res
 }
